@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-12",
+  "event_id": "luciano-2026",
+  "connection": "ok",
+  "gifts": 16,
+  "categories": {
+    "Accesorios": 7,
+    "Baño": 4,
+    "Alimentación": 3,
+    "Ropita": 2
+  },
+  "matches_import": true,
+  "reservation_test": {
+    "simultaneous_attempts": 2,
+    "successful": 1,
+    "hidden_while_reserved": true,
+    "own_reservations_checked": true,
+    "cancelled_test_reservation": true,
+    "available_after_test": 16
+  },
+  "private_tables_blocked": {
+    "invitation_rsvps": true,
+    "invitation_gift_reservations": true
+  }
+}

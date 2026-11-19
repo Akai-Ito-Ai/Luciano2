@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-18",
+  "event_id": "luciano-2026",
+  "connection": "ok",
+  "gifts": 40,
+  "categories": {
+    "Baño": 5,
+    "Alimentación": 5,
+    "Ropita": 13,
+    "Accesorios": 17
+  },
+  "matches_import": true,
+  "catalog_gifts": 41,
+  "not_available": 1,
+  "private_tables_blocked": {
+    "invitation_rsvps": true,
+    "invitation_gift_reservations": true
+  },
+  "rsvp_without_email_validation": "ok",
+  "reservation_test": {
+    "simultaneous_attempts": 2,
+    "successful": 1,
+    "hidden_while_reserved": true,
+    "own_reservations_checked": true,
+    "cancelled_test_reservation": true,
+    "available_after_test": 40
+  },
+  "sql_checks": {
+    "catalog_gifts": 41,
+    "previous_reservations_preserved": 1,
+    "previous_rsvps_preserved": 0,
+    "rsvp_without_email": true,
+    "same_name_allowed": true,
+    "rsvp_update": true,
+    "test_rsvps_rolled_back": true
+  }
+}

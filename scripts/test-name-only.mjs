@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import vm from 'node:vm';
+import { randomUUID } from 'node:crypto';
+
+const root = new URL('../', import.meta.url);
+const code = await fs.readFile(new URL('services.js', root), 'utf8');
+const context = { window: {}, URL, crypto: { randomUUID }, AbortController, setTimeout, clearTimeout };
+vm.runInNewContext(code, context);
+const storageData = new Map();
+const storage = { getItem: key => storageData.get(key) ?? null, setItem: (key, value) => storageData.set(key, value) };
+const calls = [];
+const gift = { id: randomUUID(), name: 'Regalo de prueba', product_url: 'https://example.com/producto' };
+const fetch = async (url, options) => {
+  const body = JSON.parse(options.body);
+  assert.equal('p_email' in body, false);
+  calls.push({ url, body });
+  const result = url.endsWith('invitation_my_gifts') ? [gift] : true;
+  return { ok: true, json: async () => result };
+};
+const config = { supabase: { url: 'https://example.supabase.co', publishableKey: 'sb_publishable_test', eventId: 'luciano-2026' } };
+const api = new context.window.InvitationAPI(config, { storage, fetch });
+const previousToken = randomUUID();
+storageData.set(api.namespace + 'rsvp-token', JSON.stringify(previousToken));
+const confirmed = await api.saveRsvp({ name: '  Ana  ', attending: true, partySize: '2', message: 'Nos vemos' });
+assert.equal(confirmed.name, 'Ana');
+assert.equal('email' in confirmed, false);
+assert.equal(calls.at(-1).body.p_token, previousToken);
+assert.equal(calls.at(-1).body.p_party_size, 2);
+await api.saveRsvp({ name: 'Ana', attending: false, partySize: '4', message: '' });
+assert.equal(calls.at(-1).body.p_token, previousToken);
+assert.equal(calls.at(-1).body.p_party_size, 0);
+assert.equal(await api.reserveGift(gift, { name: 'Ana' }), true);
+assert.equal(calls.at(-1).body.p_gift_id, gift.id);
+assert.equal((await api.myGifts())[0].id, gift.id);
+await api.cancelGift((await api.myGifts())[0]);
+assert.deepEqual(JSON.parse(storageData.get(api.namespace + 'my-gifts')), []);
+const beforeInvalid = calls.length;
+await assert.rejects(() => api.saveRsvp({ name: '', attending: true, partySize: 1 }));
+await assert.rejects(() => api.reserveGift(gift, { name: 'A' }));
+await assert.rejects(() => api.saveRsvp({ name: 'Ana', attending: true, partySize: 7 }));
+assert.equal(calls.length, beforeInvalid);
+const demo = new context.window.InvitationAPI({ supabase: { eventId: 'demo' } }, { storage, fetch });
+await demo.saveRsvp({ name: 'Ana', attending: true, partySize: 1, email: 'ignorado@example.com' });
+assert.equal('email' in JSON.parse(storageData.get(demo.namespace + 'demo-rsvp')), false);
+for (const name of ['config.js', 'app.js', 'decorations.js', 'welcome.js']) {
+  new vm.Script(await fs.readFile(new URL(name, root), 'utf8'), { filename: name });
+}
+const html = await fs.readFile(new URL('index.html', root), 'utf8');
+assert.equal(/name="email"|type="email"|Correo electrónico/.test(html), false);
+console.log('OK: confirmación, actualización, reserva y cancelación sin correo; token previo conservado; validaciones y sintaxis.');

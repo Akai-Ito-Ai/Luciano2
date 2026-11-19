@@ -1,0 +1,30 @@
+{
+  "source": "Lista regalos Luciano - nuevos conjuntos.xlsx",
+  "source_sha256": "65add9c11f7203d7052995a63508c9ccce5beb665cffac575c7ad5a65f3c5ef6",
+  "date": "2026-11-18",
+  "source_rows": 42,
+  "omitted": [
+    {
+      "row": 32,
+      "name": "Pack de bodies Bodycool manga corta",
+      "reason": "Duplicado omitido por indicación de los papás."
+    }
+  ],
+  "gifts": 41,
+  "categories": {
+    "Ropita": 13,
+    "Baño": 5,
+    "Alimentación": 5,
+    "Accesorios": 18
+  },
+  "images": 0,
+  "notes": [
+    "Fila 15: Esterilizador y secador de biberones Momcozy 4 en 1, sin descripción en el Excel."
+  ],
+  "separate_units": [
+    {
+      "product_url": "https://www.falabella.com.co/falabella-co/product/152928788/sabana-para-cuna-corral-de-bebe-60x90/152928789",
+      "units": 2
+    }
+  ]
+}

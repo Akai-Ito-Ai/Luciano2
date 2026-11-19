@@ -1,0 +1,15 @@
+{
+  "source": "Lista regalos completada.xlsx",
+  "source_sha256": "120c27ec2f5d0a019c4e0aa6e6039b0084117a69b6719a2b22f9b3554767182a",
+  "gifts": 16,
+  "categories": {
+    "Ropita": 2,
+    "Baño": 4,
+    "Alimentación": 3,
+    "Accesorios": 7
+  },
+  "images": 0,
+  "notes": [
+    "Fila 15: Esterilizador y secador de biberones Momcozy 4 en 1, sin descripción en el Excel."
+  ]
+}
