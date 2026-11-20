@@ -2,7 +2,7 @@
 window.INVITATION_CONFIG = {
   babyName: 'Luciano',
   familyName: 'Mejía Villamizar',
-  eventDate: '2026-12-12',
+  eventDate: '2026-12-13',
   eventTime: '15:00', // Ejemplo: '15:00'. Vacío = por confirmar.
   timeZone: 'America/Bogota',
   utcOffset: '-05:00',
