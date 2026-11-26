@@ -150,10 +150,10 @@
     content.append(actions); card.append(picture, content); return card;
   }
   const giftCategories = [
+    { id: 'accesorios', label: 'Accesorios', pattern: /acces|jugar|juguet|descubr|sueno|dormir|cuento|libro/, icons: ['blanket', 'book', 'bear'] },
+    { id: 'alimentacion', label: 'Alimentación', pattern: /aliment|comer|teter|biber|lactancia/, icons: ['bottle'] },
     { id: 'ropita', label: 'Ropita', pattern: /rop(?:a|ita)|prenda|bod(?:y|ies)|pijama|vestir/, icons: ['clothes'] },
     { id: 'bano', label: 'Baño', pattern: /bano|aseo|higiene/, icons: ['bath'] },
-    { id: 'alimentacion', label: 'Alimentación', pattern: /aliment|comer|teter|biber|lactancia/, icons: ['bottle'] },
-    { id: 'accesorios', label: 'Accesorios', pattern: /acces|jugar|juguet|descubr|sueno|dormir|cuento|libro/, icons: ['blanket', 'book', 'bear'] },
   ];
   let activeGiftCategory = giftCategories[0].id, giftCategoriesReady = false, giftsLoadFailed = false;
   const giftViews = [
